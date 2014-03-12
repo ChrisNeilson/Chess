@@ -2,7 +2,6 @@
 #include "piece.h"
 #include "player.h"
 #include <cstdlib>
-#include <iostream>
 #include <algorithm>
 
 using namespace std;
@@ -22,7 +21,6 @@ GameManager::GameManager() : grid(Grid(xw))
 
 bool GameManager::hasValidMove(char colour)
 {
-  cout << "hasValidMove" << endl;
   vector<Piece::SPtr> &pieces = colour == 'w' ? wPieces_ : bPieces_;
   for (auto pieceIter = pieces.begin(); pieceIter != pieces.end(); ++pieceIter)
   {
@@ -57,14 +55,11 @@ bool GameManager::isValidMove(Piece::SPtr piece, S8 destRow, S8 destCol)
     // Put the board in temporary end state and see if move results in self-check
     // If the destPiece is a king, this move would win us the game, it doesn't matter
     // if our king would then be in check
-    cout << "isvalidnotpiecesbetween" << endl;
     Piece::SPtr destPiece = getPiece(destRow, destCol);
     if (destPiece)
     {
-      cout << "DESTPIECE: " << destPiece->getColour() << " " << colour << endl;
       if (destPiece->getColour() == colour)
       {
-        cout << "false" << endl;
         return false;
       }
       if (destPiece->getType() == Piece::Type::King)
@@ -120,7 +115,6 @@ vector<tuple<S8, S8>> GameManager::getPossibleMoves()
 // colour moves next
 string GameManager::getStatus(char colour)
 {
-  cout << "getStatus: " << colour << endl;
   if (isCheck(colour))
   {
     if (!hasValidMove(colour))
@@ -189,8 +183,7 @@ void GameManager::destroyPiece(S8 row, S8 col)
           bPieces_.erase(iter);
           if (piece->getType() == Piece::Type::King)
           {
-            cout << "HOLY SHIT GIGANTIC ERROR!!!!!!!!!!!!!!!!!!!!!!" << endl;
-            throw 10;
+            bKing_ = nullptr;
           }
           return;
         }
@@ -205,8 +198,7 @@ void GameManager::destroyPiece(S8 row, S8 col)
           wPieces_.erase(iter);
           if (piece->getType() == Piece::Type::King)
           {
-            cout << "HOLY SHIT GIGANTIC ERROR!!!!!!!!!!!!!!!!!!!!!!w" << endl;
-            throw 10;
+            wKing_ = nullptr;
           }
           return;
         }
@@ -219,18 +211,14 @@ void GameManager::movePiece(S8 srcRow, S8 srcCol, S8 destRow, S8 destCol)
 {
   if (srcRow != destRow || srcCol != destCol)
   {
-    cout << "Piece moved from: " << (int)srcRow << " " << (int)srcCol << "to: " << (int)destRow << " " << (int)destCol << endl;
     grid.movePiece(srcRow, srcCol, destRow, destCol);
   }
 }
 
 void GameManager::setKing(Piece::SPtr king)
 {
-  cout << "kingset " << (int)king->getRow() << " " << (int)king->getCol() << endl;
   king->getColour() == 'b' ? bKing_ = king : wKing_ = king;
-  if (bKing_) cout << "kingset bking " << (int)bKing_->getRow() << " " << (int)bKing_->getCol() << endl;
-  if (wKing_) cout << "kingset wking" << (int)wKing_->getRow() << " " << (int)wKing_->getCol() << endl;
-}
+ }
 
 bool GameManager::arePiecesBetween(Piece::SPtr piece, S8 destRow, S8 destCol)
 {
@@ -340,7 +328,6 @@ bool GameManager::isValidBoard()
 
 bool GameManager::isCheck(char colour)
 {
-  cout << "isCheck: " << colour << endl;
   vector<Piece::SPtr> &pieces = colour == 'b' ? wPieces_ : bPieces_;
   Piece::SPtr king = colour == 'b' ? bKing_ : wKing_;
 

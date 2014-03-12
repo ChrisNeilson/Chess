@@ -3,7 +3,8 @@
 
 #include "ai.h"
 
-class AITwo: public AI {
+class AITwo : public AI
+{
  public:
   AITwo(char colour);
   U8 getType();

@@ -1,11 +1,5 @@
 #include "ai3.h"
-#include "bishop.h"
-#include "queen.h"
 #include "gameManager.h"
-#include "knight.h"
-#include "rook.h"
-#include <tuple>
-#include <vector>
 
 using namespace std;
 

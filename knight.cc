@@ -11,7 +11,7 @@ Piece::Type Knight::getType()
 
 U8 Knight::getValue()
 {
-  return 2;
+  return 4;
 }
 
 bool Knight::isValidMove(S8 row, S8 col)

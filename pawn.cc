@@ -21,7 +21,7 @@ Piece::Type Pawn::getType()
 
 U8 Pawn::getValue()
 {
-  return 1;
+  return 2;
 }
 
 bool Pawn::isValidMove(S8 row, S8 col) {

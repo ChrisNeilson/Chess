@@ -11,7 +11,7 @@ Piece::Type Bishop::getType()
 
 U8 Bishop::getValue()
 {
-    return 2;
+    return 4;
 }
 
 bool Bishop::isValidMove(S8 row, S8 col)

@@ -9,7 +9,7 @@ Piece::Type Rook::getType()
 
 U8 Rook::getValue()
 {
-  return 3;
+  return 6;
 }
 
 bool Rook::isValidMove(S8 row, S8 col)

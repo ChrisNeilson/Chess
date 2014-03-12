@@ -11,7 +11,7 @@ Piece::Type Queen::getType()
 
 U8 Queen::getValue()
 {
-  return 4;
+  return 8;
 }
 
 bool Queen::isValidMove(S8 row, S8 col)
